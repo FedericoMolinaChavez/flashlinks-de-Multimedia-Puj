@@ -1,0 +1,48 @@
+<div role="dialog" layout="column" layout-align="center center">
+  
+  <md-toolbar>
+    <div class="md-toolbar-tools">
+      <h2>Add Link</h2>
+    
+
+      <span flex></span>
+
+      <md-button class="md-icon-button" aria-label="Side Panel" ng-click="ctrl.closeDialog()">
+        <!--<md-tooltip>Menu</md-tooltip>-->
+        <md-icon class="md-default-theme" class="material-icons">close</md-icon>
+      </md-button>
+
+    </div>
+  </md-toolbar>
+  <div class="demo-dialog-content">
+
+    <md-input-container md-no-float class="md-block">
+      <label>Title</label>
+      <input ng-model="ctrl.title" placeholder="">
+    </md-input-container>
+
+    <md-input-container md-no-float class="md-block">
+      <label>Link</label>
+      <input ng-model="ctrl.url" placeholder="http://">
+    </md-input-container>
+
+    <md-input-container md-no-float class="md-block">
+      <label>Tags</label>
+      <tags-input ng-model="ctrl.tags" placeholder="" class="bootstrap"></tags-input>
+    </md-input-container>
+    
+  </div>
+  <div layout="row" layout-align="center" class="demo-dialog-button">
+    <md-button md-autofocus class="md-raised md-primary" ng-click="ctrl.addLink()" ng-if="ctrl.type == 'new'">
+      Add
+    </md-button>
+
+    <md-button md-autofocus class="md-raised md-primary" ng-click="ctrl.editLink()" ng-if="ctrl.type == 'edit'">
+      Edit
+    </md-button>
+
+    <md-button md-autofocus class="md-primary" ng-click="ctrl.deleteLink()" ng-if="ctrl.type == 'edit'">
+      Delete
+    </md-button>
+  </div>
+</div>

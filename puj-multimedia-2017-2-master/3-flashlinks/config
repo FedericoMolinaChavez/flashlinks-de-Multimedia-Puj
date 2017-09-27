@@ -1,0 +1,4 @@
+#!/bin/bash -xe
+export UI_PORT=9000
+export API_HOST="http://127.0.0.1"
+export API_PORT=5000

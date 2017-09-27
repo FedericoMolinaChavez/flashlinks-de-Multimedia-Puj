@@ -1,0 +1,56 @@
+
+
+<span ng-if="search !== '*'" >Tag: {{search}}</span>
+
+<md-input-container md-no-float class="md-block">
+  <md-icon class="material-icons">search</md-icon>
+  <input type="text" ng-model="searchInput" placeholder="Search by link name here"></input>
+</md-input-container>
+<md-content ng-if="getAllLinksCount() == 0" layout="row" layout-align="center" style="background: #eee">
+  <h1>Start adding Links</h1>
+</md-content>
+
+<md-card flex ng-repeat="link in links | searchFor:searchInput">
+  <md-content layout="row" layout-align="start">
+    
+    <md-content layout="column">
+      <md-card-title>
+        <md-card-title-text>
+          <md-content layout="row" layout-align="start">
+            <span class="md-title">
+              {{link.title}}
+            </span>
+
+          </md-content>
+        </md-card-title-text>
+      </md-card-title>
+      
+      
+
+      <md-card-content>
+        <span ng-if="!getMinRes()">{{link.url|http}}<br></span>
+
+        <span class="md-body-1" ng-repeat="tag in link.tags">
+          {{tag}}
+          <span ng-if="!$last">-&nbsp;</span>
+        </span>
+      </md-card-content>
+
+    </md-content>
+
+    <span flex></span>
+
+    <md-content layout="row" layout-align="start">
+      <md-button class="md-icon-button" target="_blank" ng-href="{{link.url|http}}">
+        <md-tooltip ng-if="getMinRes()">{{link.url|http}}</md-tooltip>
+        <md-icon class="md-default-theme" class="material-icons">open_in_browser</md-icon>
+      </md-button>
+      <md-button class="md-icon-button" target="_blank" ng-click="editLink(link.id)">
+        <md-tooltip ng-if="getMinRes()">Edit</md-tooltip>
+        <md-icon class="md-default-theme" class="material-icons">edit</md-icon>
+      </md-button>
+    </md-content>
+
+  </md-content>
+
+</md-card>
