@@ -15,6 +15,22 @@ services:
       - PORT=$API_PORT
     ports:
       - $API_PORT
+
+   api:
+    build: nodes/links/
+    environment:
+      - PORT=$LINK_PORT
+    ports:
+      - $LINK_PORT
+    links:
+      - rdb
+
+   api:
+    build: nodes/metric/
+    environment:
+      - PORT=$METRIC_PORT
+    ports:
+      - $METRIC_PORT
     links:
       - rdb
 
