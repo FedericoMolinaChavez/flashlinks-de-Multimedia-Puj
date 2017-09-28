@@ -16,7 +16,7 @@ services:
     ports:
       - $API_PORT
 
-   api:
+  links:
     build: nodes/links/
     environment:
       - PORT=$LINK_PORT
@@ -25,7 +25,7 @@ services:
     links:
       - rdb
 
-   api:
+  metric:
     build: nodes/metric/
     environment:
       - PORT=$METRIC_PORT
@@ -38,6 +38,22 @@ services:
     image: dockercloud/haproxy
     ports:
       - "$API_PORT:80"
+    links:
+      - api
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+   lb1:
+    image: dockercloud/haproxy
+    ports:
+      - "$METRIC_PORT:80"
+    links:
+      - api
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+   lb2:
+    image: dockercloud/haproxy
+    ports:
+      - "$LINK_PORT:80"
     links:
       - api
     volumes:
