@@ -22,3 +22,42 @@ app.use(function(req, res, next) {
   next();
 });
 
+
+//links functions
+app.get('/fl/version', function(req, res) {
+    clientLinks.get('fl/version', function(err, res2, body) {
+        res.end(JSON.stringify(body));
+    });
+});
+
+app.get('/fl/link', function(req, res) {  
+
+	clientLinks.get('/fl/link', function(req, res1, body) { 
+		res.end(JSON.stringify(body));
+	});
+});
+
+
+app.post('/fl/link/add', function(req, res){
+	clientLinks.post('/fl/link/add', function(req, res1, body){
+		res.end(JSON.stringify(body));
+	});
+});
+
+app.post('/fl/link/delete', function (req, res){
+	var id = req.params.uid;
+	var data = req.body;
+	clientLinks.post('/fl/link/delete'+id, data , function(req,res1,body){
+		res.end(JSON.stringify(body));
+	});
+});
+
+app.post('/fl/link/edit/:uid', function(req, res) {
+	var id = req.params.uid;
+	var data = req.body;
+    clientLinks.post('fl/link/edit/'+id, data, function(err, res1, body) {
+        res.end();
+    });
+});
+
+
