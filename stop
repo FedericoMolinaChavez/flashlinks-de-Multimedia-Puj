@@ -1,0 +1,5 @@
+#!/bin/bash -xe
+source config
+
+# stop stack
+docker-compose down

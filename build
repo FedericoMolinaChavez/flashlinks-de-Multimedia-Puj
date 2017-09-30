@@ -1,0 +1,12 @@
+#!/bin/bash -xe
+source config
+
+ROOT_PATH=$(pwd)
+BASE_PATH=$(echo $ROOT_PATH/base)
+
+# build base images
+docker build -t flashlinks/nodejs:latest $BASE_PATH/nodejs/
+
+# build and run images for stack
+docker-compose build
+docker-compose up -d --remove-orphans
