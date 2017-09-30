@@ -9,7 +9,7 @@ var logger = require('logops');
 
 app.use(expressLogging(logger));
 
-var port = process.env.PORT || 1000;
+var port = process.env.PORT || 3000;
 
 //Configuring express to use body-parser as middle-ware.
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -21,4 +21,3 @@ app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Methods", "PUT, GET, POST, DELETE, OPTIONS");
   next();
 });
-
