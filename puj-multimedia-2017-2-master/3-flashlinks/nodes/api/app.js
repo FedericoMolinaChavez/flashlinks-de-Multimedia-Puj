@@ -8,6 +8,9 @@ var expressLogging = require('express-logging');
 var logger = require('logops');
 
 app.use(expressLogging(logger));
+var clientLinks = request.createClient('http://links:5000/');
+var clientMetrics = request.createClient('http://metric:3000/');
+
 
 var port = process.env.PORT || 1000;
 
