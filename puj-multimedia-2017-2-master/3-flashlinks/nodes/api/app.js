@@ -63,4 +63,12 @@ app.post('/fl/links/edit/:uid', function(req, res) {
     });
 });
 
+app.get('/fl/metrics/' function(req, res)
+	{
+		clientMetrics.get('/fl/link', function(req, res)
+		{
+			res.end(JSON.stringify(body));
+		});
+	};)
+
 
