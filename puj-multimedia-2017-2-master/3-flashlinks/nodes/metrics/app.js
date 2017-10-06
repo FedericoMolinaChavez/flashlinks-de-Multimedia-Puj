@@ -36,10 +36,39 @@ r.dbCreate('db_metrics').run().then(function(result) {
 });
 
 //metodo que implementa la captura de click
-app.get(){};
+app.get('fl/metrics/',function(req, res)
+	{
+		r.db('db_metrics').table('metrics')
+    .run()
+    .then(function(result) {
+      res.end(JSON.stringify(result));
+    })
+    .error(function(err) {
+       res.end(JSON.stringify([]));
+      //res.status(500).send('Internal Server Error');
+	};);
 
-//metodo que postea el click en la base de datos
-app.post(){};
+//metodo que crea el primer campo por link en la base de datos
+app.post('fl/metrics/add',function(req, res)
+	{
+		var info = req.body;
+		console.log(info);
+  		r.db('db_metrics').table('metrics')
+    	.insert(info)
+    	.run()
+    	.then(function(result)
+    	{
+      		res.send('Query executed');
+    	})
+    	.error(function(err) 
+    	{
+      		res.status(500).send('Internal Server Error');
+    	})
+	};);
+
+//metodo que registra clicks en la base de datos
+
+
 //server instantiation
 var server = app.listen(port, function() {
   var port = server.address().port;
