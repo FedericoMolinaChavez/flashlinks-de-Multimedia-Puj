@@ -21,3 +21,24 @@ app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Methods", "PUT, GET, POST, DELETE, OPTIONS");
   next();
 });
+
+//Configuring data base with rethinkdb for metrics.
+r.dbCreate('db_metrics').run().then(function(result) {
+  console.log("db_metrics DB created")
+}).error(function(error) {
+  console.log("db_metrics already exist")
+}).then(function(){
+  r.db('db_metrics').tableCreate('metrics').run().then(function(result) {
+    console.log("metrics table created")
+  }).error(function(error) {
+    console.log("metrics table already exist")
+  });
+});
+
+//server instantiation
+var server = app.listen(port, function() {
+  var port = server.address().port;
+  console.log("App now running on port", port);
+});
+
+
