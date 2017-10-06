@@ -35,10 +35,18 @@ r.dbCreate('db_metrics').run().then(function(result) {
   });
 });
 
+//metodo que implementa la captura de click
+app.get(){};
+
+//metodo que postea el click en la base de datos
+app.post(){};
 //server instantiation
 var server = app.listen(port, function() {
   var port = server.address().port;
   console.log("App now running on port", port);
 });
+
+
+
 
 
