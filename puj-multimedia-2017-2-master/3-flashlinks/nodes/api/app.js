@@ -70,6 +70,25 @@ app.get('/fl/metrics/' function(req, res)
 		});
 	};)
 
+app.post('/fl/metrics/add', function(req, res) {
+    var data = req.body;
+    clientMetric.post('fl/metrics/add', data, function(err, res2, body) {
+        res.end();
+    });
+});
+
+app.post('/fl/metrics/visit/', function(req, res) {
+    var data = req.body;
+    clientMetric.post('fl/metrics/visit/', data, function(err, res2, body) {
+        res.end();
+    });
+});
+
+app.get('/fl/tag', function(req, res) {
+    clientLinks.get('fl/tag', function(err, res2, body) {
+        res.end(JSON.stringify(body));
+    });
+});
 
 var server = app.listen(port, function() {
 	var port = server.address().port;

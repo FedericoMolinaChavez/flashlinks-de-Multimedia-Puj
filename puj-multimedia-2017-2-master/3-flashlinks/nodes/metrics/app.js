@@ -35,10 +35,8 @@ r.dbCreate('db_metrics').run().then(function(result) {
   });
 });
 
-//metodo que implementa la captura de click
-app.get('fl/metrics/',function(req, res)
-	{
-		r.db('db_metrics').table('metrics')
+app.get('/fl/metrics/', function(req, res) {  
+  r.db('db_metric').table('metrics')
     .run()
     .then(function(result) {
       res.end(JSON.stringify(result));
@@ -46,34 +44,47 @@ app.get('fl/metrics/',function(req, res)
     .error(function(err) {
        res.end(JSON.stringify([]));
       //res.status(500).send('Internal Server Error');
-	};);
+    })
+});
 
-//metodo que crea el primer campo por link en la base de datos
-app.post('fl/metrics/add',function(req, res)
-	{
-		var info = req.body;
-		console.log(info);
-  		r.db('db_metrics').table('metrics')
-    	.insert(info)
-    	.run()
-    	.then(function(result)
-    	{
-      		res.send('Query executed');
-    	})
-    	.error(function(err) 
-    	{
-      		res.status(500).send('Internal Server Error');
-    	})
-	};);
-
-//metodo que registra clicks en la base de datos
+app.post('/fl/metrics/add', function(req, res){
+  var data = req.body;
+  console.log(data);
+  r.db('db_metric').table('metrics')
+    .insert(data)
+    .run()
+    .then(function(result) {
+      res.send('Query executed');
+    })
+    .error(function(err) {
+      res.status(500).send('Internal Server Error');
+    })
+});
 
 
-//server instantiation
+app.post('/fl/metrics/visit/', function(req, res) {  
+  var data = req.body;
+  var url = data.url;
+  r.db('db_metric').table('metrics')
+    .filter(r.row('url').eq(url))
+    .update({visits: r.row('visits').add(1).default(0)})
+    .run()
+    .then(function(result) {
+      res.send('Query executed');
+    })
+    .error(function(err) {
+      res.status(500).send('Internal Server Error');
+    })
+});
+
+/*
+Server start
+*/
 var server = app.listen(port, function() {
   var port = server.address().port;
   console.log("App now running on port", port);
 });
+
 
 
 
