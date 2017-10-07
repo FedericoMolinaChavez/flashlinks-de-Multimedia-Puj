@@ -6,11 +6,10 @@ var bodyParser = require('body-parser');
 var app = express();
 var expressLogging = require('express-logging');
 var logger = require('logops');
-
-app.use(expressLogging(logger));
+var request = require('request-json');
 var clientLinks = request.createClient('http://links:2000/');
 var clientMetrics = request.createClient('http://metric:3000/');
-
+app.use(expressLogging(logger));
 
 var port = process.env.PORT || 1000;
 
