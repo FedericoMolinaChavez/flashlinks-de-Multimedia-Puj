@@ -108,6 +108,12 @@
       $scope._mdPanel.open(config);
     };
 
+    $scope.visitLink = function(url) {
+      PollingService.cancelNextLoad();
+      LinksService.visitLink(url);
+    };
+
+
     $scope.getAllLinksCount = function(){
       return LinksService.getLinks().length;
     };

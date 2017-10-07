@@ -10,7 +10,7 @@ WORKDIR /usr/src/app
 # Copy app code
 COPY package.json .
 COPY app.js .
-COPY env-docker.js ./env.js
+
 
 # Install dependencies
 RUN npm install

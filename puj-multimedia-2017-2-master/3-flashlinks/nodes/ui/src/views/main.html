@@ -25,7 +25,6 @@
         </md-card-title-text>
       </md-card-title>
       
-      
 
       <md-card-content>
         <span ng-if="!getMinRes()">{{link.url|http}}<br></span>
@@ -41,7 +40,7 @@
     <span flex></span>
 
     <md-content layout="row" layout-align="start">
-      <md-button class="md-icon-button" target="_blank" ng-href="{{link.url|http}}">
+      <md-button class="md-icon-button" target="_blank" ng-click="visitLink(link.url)" ng-href="{{link.url|http}}">
         <md-tooltip ng-if="getMinRes()">{{link.url|http}}</md-tooltip>
         <md-icon class="md-default-theme" class="material-icons">open_in_browser</md-icon>
       </md-button>
