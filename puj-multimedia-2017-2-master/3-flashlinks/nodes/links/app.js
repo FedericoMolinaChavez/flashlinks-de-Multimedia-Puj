@@ -10,7 +10,7 @@ var logger = require('logops');
 
 app.use(expressLogging(logger));
 
-var port = process.env.PORT || 5000;
+var port = process.env.PORT || 2000;
 
 //rethinkdb setup
 var r = require('rethinkdbdash')({
